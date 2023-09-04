@@ -128,27 +128,6 @@ if (carrito.length > 0) {
 
 
 
-    // let validUsers = [
-    //     { username: "luca", password: "patitasdepescado" },
-    //     { username: "usuario2", password: "contraseña2" },
-        
-    // ];
-
-    // let isLoggedIn = false;
-
-    // for (let i = 0; i < validUsers.length; i++) {
-    //     if (username === validUsers[i].username && password === validUsers[i].password) {
-    //         isLoggedIn = true;
-    //         break;
-    //     }
-    // }
-
-    // if (isLoggedIn) {
-    //     document.getElementById("message").textContent = "Inicio de sesión exitoso. ¡Bienvenido!";
-    // } else {
-    //     document.getElementById("message").textContent = "Credenciales incorrectas. Inténtalo de nuevo.";
-    // }
-
-    
+   
 
 
