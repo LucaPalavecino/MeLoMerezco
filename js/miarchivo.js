@@ -2,99 +2,94 @@
 alert("Bienvenidos a MeLo Merezco")
 
 const productos = [
-  "Camiseta Roja",
-  "Pantalón Negro",
-  "Vestido Floral",
-  "Chaqueta de Mezclilla",
-  "Sudadera Gris",
-  "Blusa Blanca",
-  "Jeans Azules",
-  "Falda Plisada",
-  "Chaleco Negro",
-  "Shorts Vaqueros"
-];
-const precios = [
-  2500,
-  3400,
-  4500,
-  3900,
-  2500,
-  1800,
-  2900,
-  2200,
-  2800,
-  1900
+    { nombre: "Camiseta", precio: 20 },
+    { nombre: "Pantalón", precio: 30 },
+    { nombre: "Vestido", precio: 50 },
+    { nombre: "Chaqueta", precio: 60 },
+    { nombre: "Calcetines", precio: 5 },
+    { nombre: "Zapatos", precio: 70 },
+    { nombre: "Sombrero", precio: 15 },
+    { nombre: "Bufanda", precio: 10 },
+    { nombre: "Guantes", precio: 8 },
+    { nombre: "Abrigo", precio: 75 }
 ];
 
-// Función para mostrar la lista de productos
+// Inicializar el carrito de compra
+const carrito = [];
+
+// Funcion poara mostrar los productos disponibles
 function mostrarProductos() {
-  let listaProductos = "Productos disponibles:\n";
-  for (let i = 0; i < productos.length; i++) {
-      listaProductos += `${i + 1}. ${productos[i]} - $${precios[i].toFixed(2)}\n`;
-  }
-  return listaProductos;
+    let listaProductos = "Productos disponibles:\n";
+    for (let i = 0; i < productos.length; i++) {
+        listaProductos += `${i + 1}. ${productos[i].nombre} - $${productos[i].precio}\n`;
+    }
+    alert(listaProductos);
 }
 
-// Función para seleccionar productos y cantidades
-function seleccionarProductos() {
-  const carrito = [];
-  
-  while (true) {
-      const seleccion = parseInt(prompt(mostrarProductos() + "\n\n Oprima (0 para salir):"));
-      
-      if (seleccion === 0) {
-          break;
-      }
-      
-      if (seleccion < 1 || seleccion > productos.length) {
-          alert("Selección inválida. Intente nuevamente.");
-          continue;
-      }
-      
-      const cantidad = parseInt(prompt(`Seleccione la cantidad de ${productos[seleccion - 1]}:`));
-      
-      if (isNaN(cantidad) || cantidad <= 0) {
-          alert("Cantidad inválida. Intente nuevamente.");
-          continue;
-      }
-      
-      carrito.push({
-          producto: productos[seleccion - 1],
-          cantidad: cantidad,
-          subtotal: precios[seleccion - 1] * cantidad
-      });
-      
-      alert(`Se ha agregado ${cantidad} ${productos[seleccion - 1]} al carrito.`);
-  }
-  
-  return carrito;
+// Funcion para agregar productos al carrito
+function agregarAlCarrito() {
+    mostrarProductos();
+    const seleccion = parseInt(prompt("Ingrese el número del producto que desea agregar al carrito:")) - 1;
+    const cantidad = parseInt(prompt("Ingrese la cantidad de unidades:"));
+
+    if (seleccion >= 0 && seleccion < productos.length && cantidad > 0) {
+        carrito.push({ producto: productos[seleccion], cantidad });
+        alert("Producto agregado al carrito");
+    } else {
+        alert("Selección inválida");
+    }
 }
 
-// Función para calcular el precio total del carrito
-function calcularTotal(carrito) {
-  let total = 0;
-  for (const item of carrito) {
-      total += item.subtotal;
-  }
-  return total;
+// Funcion para calcular el precio total del carrito
+function calcularTotalCarrito() {
+    let total = 0;
+    for (const item of carrito) {
+        total += item.producto.precio * item.cantidad;
+    }
+    return total;
 }
 
+// Funcion para mostrar el contenido y el precio total a pagar
+function mostrarCarrito() {
+    let contenidoCarrito = "Contenido del carrito:\n";
+    for (const item of carrito) {
+        contenidoCarrito += `${item.producto.nombre} - Cantidad: ${item.cantidad}\n`;
+    }
 
+    const total = calcularTotalCarrito();
+    contenidoCarrito += `\nTotal a pagar: $${total}`;
 
-// Ejecución 
-const carrito = seleccionarProductos();
-
-if (carrito.length > 0) {
-  const totalCompra = calcularTotal(carrito);
-  let factura = "Detalles de la compra:\n";
-  for (const item of carrito) {
-      factura += `${item.cantidad} ${item.producto} - $${item.subtotal.toFixed(2)}\n`;
-  }
-  factura += `\nTotal a pagar: $${totalCompra.toFixed(2)}`;
-  alert(factura);
-} else {
-  alert("Gracias por visitar MeLo Merezco");
+    alert(contenidoCarrito);
 }
+
+// Menú de la tienda
+function menuTienda() {
+    while (true) {
+        const opcion = parseInt(prompt("Seleccione una opción:\n1. Ver productos\n2. Agregar al carrito\n3. Ver carrito\n4. Salir"));
+
+        switch (opcion) {
+            case 1:
+                mostrarProductos();
+                break;
+            case 2:
+                agregarAlCarrito();
+                break;
+            case 3:
+                mostrarCarrito();
+                break;
+            case 4:
+                return;
+            default:
+                alert("Opción inválida");
+        }
+    }
+}
+
+// Iniciar la tienda
+menuTienda();
+
+alert("Gracias por visitar MeLo Merezco")
+
   
 
 
