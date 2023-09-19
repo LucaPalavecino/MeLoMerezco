@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MeLo Merezco</title>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
+    <header>
+        <h1>MeLo Merezco</h1>
+        <div id="cart-button" class="cart-button">Carrito</div>
+    </header>
+
+    <section class="products">
+        <!-- Productos se generan aca con JS -->
+    </section>
+
+    <aside class="cart">
+        <h2>Carrito de Compras</h2>
+        <div id="cart-content" class="cart-content">
+            <!-- Contenido del carrito se genera aca con JS -->
+            <p>Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-total">
+            <p>Total: $<span id="cart-total-amount">0</span></p>
+        </div>
+        <button id="checkout-button" class="checkout-button" disabled>Finalizar Compra</button>
+    </aside>
+
     <script src="./js/miarchivo.js"></script>
 </body>
+
 </html>
-
-
