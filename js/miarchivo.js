@@ -9,7 +9,7 @@ const productos = [
     { id: 7, nombre: "Camisa mangas largas", precio: 6000 },
     { id: 8, nombre: "Shorts", precio: 3000 },
     { id: 9, nombre: "Corbata", precio: 1600 },
-    { id: 10, nombre: "Medias largas", precio: 2600},
+    { id: 10, nombre: "Medias largas", precio: 2600 },
     { id: 11, nombre: "Medias cortas", precio: 2000 },
     { id: 12, nombre: "Guantes de Invierno", precio: 4000 },
 ];
@@ -38,11 +38,15 @@ function generarTarjetasDeProductos() {
 function agregarAlCarrito(productoId) {
     const producto = productos.find(p => p.id === productoId);
 
+
     if (producto) {
         const itemEnCarrito = cart.find(item => item.producto.id === productoId);
 
+
         if (itemEnCarrito) {
             itemEnCarrito.cantidad++;
+
+
         } else {
             cart.push({ producto, cantidad: 1 });
         }
@@ -56,7 +60,9 @@ function actualizarCarrito() {
     const cartContent = document.querySelector('#cart-content');
     cartContent.innerHTML = '';
 
+
     let total = 0;
+
 
     cart.forEach(item => {
         const itemDiv = document.createElement('div');
@@ -72,6 +78,8 @@ function actualizarCarrito() {
 
     const checkoutButton = document.querySelector('#checkout-button');
     checkoutButton.disabled = cart.length === 0;
+
+
 }
 
 // Función para mostrar el carrito
@@ -97,11 +105,21 @@ cartButton.addEventListener('click', () => {
     }
 });
 
-// Evento para finalizar la compra
+// Evento para finalizar la compra y para borrar el carrito en el almacenamiento local 
 const checkoutButton = document.querySelector('#checkout-button');
 checkoutButton.addEventListener('click', () => {
-    alert('Compra finalizada. Total a pagar: $' + document.querySelector('#cart-total-amount').textContent);
+    Swal.fire({
+        title: 'Felicidades!',
+        text: ('Compra finalizada. Total a pagar: $' + document.querySelector('#cart-total-amount').textContent),
+        icon: 'success',
+        confirmButtonText: 'so vo'
+    })
+    cart.length = 0; // Vaciamos el carrito
+    actualizarCarrito();
+    guardarCarritoEnLocalStorage(); // Actualizamos el almacenamiento local
 });
+
+
 
 // Generar las tarjetas de productos al cargar la página
 window.addEventListener('load', () => {
@@ -149,13 +167,10 @@ function agregarAlCarrito(productoId) {
     }
 }
 
-// Evento para finalizar la compra y borrar el carrito en el almacenamiento local
-checkoutButton.addEventListener('click', () => {
-    alert('Compra finalizada. Total a pagar: $' + document.querySelector('#cart-total-amount').textContent);
-    cart.length = 0; // Vaciamos el carrito
-    actualizarCarrito();
-    guardarCarritoEnLocalStorage(); // Actualizamos el almacenamiento local
-});
+
+
+
+
 
 
 
